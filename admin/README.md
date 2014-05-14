@@ -1,5 +1,5 @@
-Administation
-=============
+Administration
+==============
 
 4 tools:
 
