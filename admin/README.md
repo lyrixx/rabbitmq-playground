@@ -121,10 +121,9 @@ rabbitmqctl
 Useful commands:
 
     sudo rabbitmqctl add_vhost /foobar
-    sudo rabbitmqctl set_permissions -p /foobar guest * * *
+    sudo rabbitmqctl set_permissions -p /foobar guest '.*' '.*' '.*'
     sudo rabbitmqctl delete_vhost /foobar
     watch -n 1 'sudo rabbitmqctl list_queues name messages_ready messages_unacknowledged messages'
-
 
 All commands
 
