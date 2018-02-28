@@ -19,6 +19,7 @@ class Broker
             'delivery_mode' => 2,
             'reply_to' => $responseQueueName,
             'correlation_id' => $correlationId,
+            'foobar' => 'greg',
         ));
     }
 

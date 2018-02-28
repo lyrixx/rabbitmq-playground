@@ -1,14 +1,17 @@
 <?php
 
-`rabbitmqadmin --vhost /queue-type delete exchange name=foo 2>&1 > /dev/null`;
-`rabbitmqadmin --vhost /queue-type delete queue name=bar 2>&1 > /dev/null`;
-`rabbitmqadmin --vhost /queue-type delete queue name=baz 2>&1 > /dev/null`;
-`rabbitmqadmin --vhost /queue-type delete queue name=bazinga 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete exchange name=foo 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete queue name=bar 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete queue name=bazinga 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete queue name=wildcard 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete queue name=twitter 2>&1 > /dev/null`;
+// `./rabbitmqadmin --host rabbitmq-3.lxc --vhost /queue-type delete queue name=google 2>&1 > /dev/null`;
 
 require __DIR__.'/Broker.php';
 
 $conn = new AMQPConnection(array(
     'vhost' => '/queue-type',
+    'host' => 'rabbitmq-3.lxc'
 ));
 
 $broker = new Broker($conn);
@@ -43,7 +46,7 @@ function create_queue(Broker $broker, $name, $routingKeys)
     return $queue;
 }
 
-function publish_and_consume(AmqpExchange $exchange, $routingKey, array $queues, $message = 'A message.')
+function publish_and_consume(\AmqpExchange $exchange, $routingKey, array $queues, $message = 'A message.')
 {
     echo sprintf('If I publish "%s" to exchange "foo", with routing key "%s":%s', $message, $routingKey, PHP_EOL);
     $exchange->publish($message, $routingKey);
